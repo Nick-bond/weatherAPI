@@ -16,7 +16,7 @@ const ForecastItems = (data) => {
     return (
         <div>
             <div>
-                <h3 className="title">Weather in {forecast.city.name} </h3>
+                <h3 className="title">Weather forecast in {forecast.city.name} </h3>
             </div>
             <div className="days">
                 {

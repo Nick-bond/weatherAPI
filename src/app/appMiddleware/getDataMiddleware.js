@@ -18,15 +18,21 @@ const getDataMiddleware = ({dispatch, getState}) => {
         }
 
         if (typeof getAPIData !== 'function') {
-            throw new Error('Expected callAPI to be a function.')
+            throw new Error('Expected getAPIData to be a function.')
         }
         const [ requestType, successType, failureType ] = types;
         
         dispatch({type: requestType, loading: true});
 
         return getAPIData()
-            .then(response => response.json())
-            .then(json => dispatch({type: successType, loading: false, data: json}))
+            .then((response) => response.json())
+            .then((json) => {
+                if (json.cod !== "200") {
+                    return dispatch({type: failureType, loading: false})
+                } else {
+                    return dispatch({type: successType, loading: false, data: json})
+                }
+            })
             .catch(e => dispatch({type: failureType, loading: false, msg: e}))
     };
 };

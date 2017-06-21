@@ -4,30 +4,10 @@ import styles from "../../styles/styles.css"
 import ForecastItems from "./ForecastItems"
 import SearchBar from "./SearchBar"
 
-const Home = ({forecast, loading, getTodayWeather, isInit, getFiveDaysWeather, getTenDaysWeather, gettingUserGeoPosition, handleChange, getOneDayWeather}) => {
+const Home = ({forecast, loading, isInit, getFiveDaysWeather, getTenDaysWeather, initDefaultWeather, searchWeatherByCityName, getOneDayWeather}) => {
     if (!isInit) {
-        function* showWeatherForUser() {
-            let takeGeolocation = yield gettingUserGeoPosition();
-            let showWeather = yield getTodayWeather(takeGeolocation.lat, takeGeolocation.long);
-            return 1;
-        };
-        function execute(generator, yieldValue) {
-            let next = generator.next(yieldValue);
-            if (!next.done) {
-                next.value.then(
-                    result => execute(generator, result),
-                    err => generator.throw(err)
-                );
-            } else {
-              return false;
-            }
-        }
-        execute(showWeatherForUser());
-    }
-
-    const sendData = (x) => {
-        return getFiveDaysWeather(5)
-    }
+        initDefaultWeather();
+    };
 
     if (loading) {
         return <div className="preloader"></div>
@@ -41,21 +21,22 @@ const Home = ({forecast, loading, getTodayWeather, isInit, getFiveDaysWeather, g
                      <div className="link" onClick={getFiveDaysWeather.bind(null, forecast)}>Show weather for 5 days</div>
                      <div className="link" onClick={getTenDaysWeather.bind(null, forecast)}>Show weather for 10 days</div>
                  </div>
-                 <SearchBar handleChange={handleChange} />
+                 <SearchBar searchWeatherByCityName={searchWeatherByCityName} />
              </header>
                  <ForecastItems data={forecast}/>
          </div>
      );
 };
 
-
 Home.propTypes = {
-    getTodayWeather: PropTypes.func.isRequired,
     forecast: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     isInit: PropTypes.bool.isRequired,
+    initDefaultWeather: PropTypes.func.isRequired,
+    getOneDayWeather: PropTypes.func.isRequired,
     getFiveDaysWeather: PropTypes.func.isRequired,
-    getTenDaysWeather: PropTypes.func.isRequired
+    getTenDaysWeather: PropTypes.func.isRequired,
+    searchWeatherByCityName: PropTypes.func.isRequired
 };
 
 export default Home;

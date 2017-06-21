@@ -7,6 +7,7 @@
 .input-city {
     padding: 5px;
     margin-left: 5px;
+    outline: 0;
 }
 .wrapper {
     box-shadow: 0 1px 23px 0 rgba(0, 0, 0, 0.33);
@@ -52,6 +53,20 @@
 .temp span:last-child {
     margin-right: 0;
 }
+
+.search-btn {
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    padding: 7px;
+    background: #43bf43;
+    color: #fff;
+    text-transform: uppercase;
+}
+.search-btn:hover {
+    background: #5FBF0E;
+}
+
 .preloader {
     position: absolute;
     top: 50%;
