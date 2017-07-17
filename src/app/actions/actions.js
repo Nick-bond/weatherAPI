@@ -1,4 +1,3 @@
-//const API_KEY = "1a7a6c9afdae6a32d0b551ed26e5dc87"; if api key would be blocked 
 const API_KEY = "2b04e85ae59c6188863aa5cab712843f";
 const API_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
 
